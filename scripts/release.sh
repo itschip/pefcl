@@ -13,4 +13,4 @@ cp -r ./web/dist ./temp/$RESOURCE/web/dist # Copy web files
 
 echo "$PREFIX Zipping it up: $RESOURCE.zip"
 
-cd temp && zip -r $RESOURCE-pre-$GITHUB_SHA_SHORT.zip ./$RESOURCE
+cd temp && zip -r $RESOURCE.zip ./$RESOURCE
