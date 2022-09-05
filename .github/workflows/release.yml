@@ -27,6 +27,7 @@ jobs:
           echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
           echo "::set-output name=SHORT_SHA::$(git rev-parse --short HEAD)"
           echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=VERSION_TAG::${GITHUB_REF/refs\/tags\//}""
 
       - name: Install main deps
         run: yarn --frozen-lockfile
@@ -53,7 +54,7 @@ jobs:
         uses: 'marvinpinto/action-automatic-releases@v1.2.1'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          title: PEFCL Release - (${{ steps.get_vars.outputs.SHORT_SHA }})
+          title: PEFCL Release | (${{ steps.get_vars.outputs.VERSION_TAG }})
           prerelease: false
           automatic_release_tag: ${{ steps.get_vars.outputs.BRANCH_NAME }}
           files: ./temp/pefcl.zip
